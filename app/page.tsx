@@ -166,7 +166,7 @@ export default function EncryptedJockeyPage() {
       role: "Fullstack Developer",
       image: "/professional-fullstack-developer.jpg",
       status: "active",
-      portfolioUrl: "https://portfolio-ghifari-ezra.com", 
+      portfolioUrl: "https://portofolio-jade-two.vercel.app", 
     },
     {
       name: "Muhammad Hilmi",
