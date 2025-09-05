@@ -1,7 +1,7 @@
 # ENCRYPTED JOCKEY
 
 A modern, professional freelance service website offering UI/UX Design, Web Development, Penetration Testing, and IT Consulting services. Built with Next.js 15, TypeScript, and Tailwind CSS v4.
-## Live Demo (https://encrypted-joki.vercel.app/)
+## Live Demo (https://encrypted-it-services.vercel.app/)
 ![ENCRYPTED JOCKEY Website](https://img.shields.io/badge/Status-Live-brightgreen) ![Next.js](https://img.shields.io/badge/Next.js-15-black) ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-v4-38bdf8)
 
 ## 🚀 Features
