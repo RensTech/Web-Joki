@@ -11,8 +11,8 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "ENCRYPTED JOCKEY - Professional Freelance Services",
-  description: "Professional UI/UX Design, Web Development, and Penetration Testing services by ENCRYPTED JOCKEY",
+  title: "ENCRYPTED IT -Services - Professional Freelance Services",
+  description: "Professional UI/UX Design, Web Development, and Penetration Testing services by ENCRYPTED IT -Services",
   generator: "v0.app",
 }
 
