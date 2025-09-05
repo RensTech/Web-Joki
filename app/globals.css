@@ -180,7 +180,7 @@
   }
 }
 
-/* Premium button styles with subtle effects */
+/* tombol gacor */
 .premium-button {
   position: relative;
   overflow: hidden;
@@ -218,16 +218,15 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Smooth gradient text effects */
+/* efek smooth gradasi */
 .gradient-text {
   background: linear-gradient(135deg, oklch(0.985 0 0), oklch(0.75 0.15 150));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: oklch(0.985 0 0); /* Fallback for browsers that don't support background-clip */
+  color: oklch(0.985 0 0); 
 }
 
-/* Professional navigation styles */
 .nav-link {
   position: relative;
   transition: all 0.3s ease;
@@ -248,7 +247,6 @@
   width: 100%;
 }
 
-/* Elegant form input styles */
 .premium-input {
   transition: all 0.3s ease;
   border: 1px solid var(--border);
@@ -260,7 +258,6 @@
   outline: none;
 }
 
-/* Sophisticated animation utilities */
 .animate-fade-in-up {
   animation: fade-in-up 0.6s ease-out;
 }
@@ -279,7 +276,6 @@
   animation: shimmer 2s infinite;
 }
 
-/* Professional scrollbar styling */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -298,18 +294,15 @@
   opacity: 0.8;
 }
 
-/* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
 }
 
-/* Professional focus states */
 .focus-visible:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
-/* Responsive typography improvements */
 @media (max-width: 768px) {
   .premium-card:hover {
     transform: none;
@@ -320,7 +313,6 @@ html {
   }
 }
 
-/* Dark mode optimizations */
 .dark .premium-card {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }

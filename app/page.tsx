@@ -13,6 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog"
 import {
   Shield,
@@ -119,7 +120,7 @@ export default function EncryptedJockeyPage() {
       timeline: "Depending on request",
       details: {
         process: ["Architecture Planning", "Frontend Development", "Backend Integration", "Testing & Deployment"],
-        tools: ["React/Next.js", "Node.js", "TypeScript", "PostgreSQL"],
+        tools: ["React/Next.js", "Node.js", "TypeScript", "PostgreSQL", "Laravel", "PHP",],
         deliverables: ["Production-Ready Application", "Admin Dashboard", "API Documentation", "Deployment Setup"],
       },
     },
@@ -133,7 +134,7 @@ export default function EncryptedJockeyPage() {
       timeline: "Depending on request",
       details: {
         process: ["Reconnaissance", "Vulnerability Analysis", "Exploitation Testing", "Reporting & Remediation"],
-        tools: ["Kali Linux", "Burp Suite", "Nessus", "Metasploit"],
+        tools: ["Kali Linux", "Burp Suite", "Nessus", "Metasploit", "Hydra", "Pentester own script",],
         deliverables: ["Detailed Security Report", "Risk Assessment", "Remediation Roadmap", "Executive Summary"],
       },
     },
@@ -269,7 +270,7 @@ export default function EncryptedJockeyPage() {
             </div>
 
             <div className="hidden md:flex items-center space-x-8">
-              {["Services", "Portfolio", "About", "Contact"].map((item) => (
+              {["Services", "Portfolio", "Contact"].map((item) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
@@ -290,31 +291,38 @@ export default function EncryptedJockeyPage() {
               </Button>
             </div>
 
-            <Button variant="ghost" size="sm" className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <Button variant="ghost" size="sm" className="md:hidden z-60" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+              {mobileMenuOpen ? <X className="w-6 h-6 transition-transform duration-300 rotate-90" /> : <Menu className="w-6 h-6 transition-transform duration-300" />}
             </Button>
           </div>
 
-          {mobileMenuOpen && (
-            <div className="md:hidden mt-4 pb-4 border-t border-border">
-              <div className="flex flex-col space-y-4 pt-4">
-                {["Services", "Portfolio", "About", "Contact"].map((item) => (
-                  <a
-                    key={item}
-                    href={`#${item.toLowerCase()}`}
-                    className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      setMobileMenuOpen(false)
-                      scrollToSection(item.toLowerCase())
-                    }}
-                  >
-                    {item}
-                  </a>
-                ))}
-              </div>
+          <div className={`md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border transition-all duration-500 ease-in-out overflow-hidden ${mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
+            <div className="flex flex-col space-y-4 pt-4 px-4 pb-6">
+              {["Services", "Portfolio", "Contact"].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer py-2 transform hover:translate-x-2 duration-300"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setMobileMenuOpen(false)
+                    scrollToSection(item.toLowerCase())
+                  }}
+                >
+                  {item}
+                </a>
+              ))}
+              <Button
+                className="bg-accent hover:bg-accent/90 text-accent-foreground mt-2 transform hover:scale-105 transition-transform duration-300"
+                onClick={() => {
+                  setMobileMenuOpen(false)
+                  scrollToSection("contact")
+                }}
+              >
+                Get Started
+              </Button>
             </div>
-          )}
+          </div>
         </div>
       </nav>
 
@@ -337,16 +345,16 @@ export default function EncryptedJockeyPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <Button
                 size="lg"
-                className="bg-accent hover:bg-accent/90 text-accent-foreground group"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground group transition-all duration-300 hover:scale-105"
                 onClick={handleStartProject}
               >
                 Start Your Project
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-border hover:bg-accent/10 bg-transparent"
+                className="border-border hover:bg-accent/10 bg-transparent transition-all duration-300 hover:scale-105"
                 onClick={() => scrollToSection("portfolio")}
               >
                 <Eye className="w-5 h-5 mr-2" />
@@ -361,7 +369,7 @@ export default function EncryptedJockeyPage() {
                 { number: "24/7", label: "Support Available", icon: <Users className="w-5 h-5" /> },
                 { number: "1.5+", label: "Years Experience", icon: <Award className="w-5 h-5" /> },
               ].map((stat, index) => (
-                <div key={index} className="text-center group">
+                <div key={index} className="text-center group transform hover:scale-105 transition-transform duration-300">
                   <div className="flex items-center justify-center gap-2 text-accent mb-2">
                     {stat.icon}
                     <span className="text-3xl font-bold text-foreground">{stat.number}</span>
@@ -383,127 +391,148 @@ export default function EncryptedJockeyPage() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {services.map((service, index) => (
               <Dialog key={index}>
                 <DialogTrigger asChild>
-                  <Card className="group cursor-pointer border-border hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10 bg-card/50 backdrop-blur-sm">
-                    <CardHeader className="pb-4">
-                      <div className="text-accent mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Card className="group cursor-pointer border-border hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10 bg-card/50 backdrop-blur-sm h-full flex flex-col min-h-[380px] transform hover:-translate-y-2">
+                    <CardHeader className="pb-4 flex-grow">
+                      <div className="text-accent mb-4 group-hover:scale-110 transition-transform duration-300 flex justify-center">
                         {service.icon}
                       </div>
-                      <CardTitle className="text-2xl font-bold group-hover:text-accent transition-colors">
+                      <CardTitle className="text-xl font-bold group-hover:text-accent transition-colors text-center mb-3">
                         {service.title}
                       </CardTitle>
-                      <CardDescription className="text-muted-foreground text-base leading-relaxed">
+                      <CardDescription className="text-muted-foreground text-sm leading-relaxed text-center line-clamp-3">
                         {service.description}
                       </CardDescription>
                     </CardHeader>
-                    <CardContent className="space-y-6">
-                      <div className="space-y-3">
-                        {service.features.map((feature, idx) => (
-                          <div key={idx} className="flex items-center gap-2 text-sm">
-                            <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
-                            <span>{feature}</span>
+                    <CardContent className="space-y-4">
+                      <div className="space-y-2">
+                        {service.features.slice(0, 3).map((feature, idx) => (
+                          <div key={idx} className="flex items-start gap-2 text-xs">
+                            <CheckCircle className="w-3 h-3 text-accent flex-shrink-0 mt-0.5" />
+                            <span className="leading-tight">{feature}</span>
                           </div>
                         ))}
+                        {service.features.length > 3 && (
+                          <div className="text-xs text-muted-foreground pl-5">
+                            +{service.features.length - 3} more features
+                          </div>
+                        )}
                       </div>
 
                       <div className="pt-4 border-t border-border">
                         <div className="flex justify-between items-center mb-2">
-                          <span className="text-sm text-muted-foreground">Starting Price</span>
-                          <span className="font-bold text-accent">{service.price}</span>
+                          <span className="text-xs text-muted-foreground">Starting Price</span>
+                          <span className="font-bold text-accent text-sm">{service.price}</span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-sm text-muted-foreground">Timeline</span>
-                          <span className="font-medium">{service.timeline}</span>
+                          <span className="text-xs text-muted-foreground">Timeline</span>
+                          <span className="font-medium text-xs">{service.timeline}</span>
                         </div>
                       </div>
 
-                      <div className="text-accent text-sm font-medium group-hover:translate-x-2 transition-transform flex items-center gap-1">
-                        Learn More <ArrowRight className="w-4 h-4" />
+                      <div className="text-accent text-xs font-medium group-hover:translate-x-1 transition-transform duration-300 flex items-center gap-1 justify-center pt-2 group-hover:scale-105">
+                        Learn More <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-300" />
                       </div>
                     </CardContent>
                   </Card>
                 </DialogTrigger>
-                <DialogContent className="max-w-4xl bg-background border-border">
-                  <DialogHeader>
-                    <DialogTitle className="text-3xl font-bold flex items-center gap-3">
-                      <div className="text-accent">{service.icon}</div>
-                      {service.title}
-                    </DialogTitle>
-                    <DialogDescription className="text-lg text-muted-foreground">
-                      {service.description}
-                    </DialogDescription>
-                  </DialogHeader>
-
-                  <div className="grid md:grid-cols-3 gap-8 mt-8">
-                    <div>
-                      <h4 className="font-bold text-accent mb-4 flex items-center gap-2">
-                        <TrendingUp className="w-5 h-5" />
-                        Process
-                      </h4>
-                      <ul className="space-y-3">
-                        {service.details.process.map((step, idx) => (
-                          <li key={idx} className="flex items-start gap-3">
-                            <div className="w-6 h-6 bg-accent/20 text-accent rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">
-                              {idx + 1}
-                            </div>
-                            <span className="text-sm">{step}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div>
-                      <h4 className="font-bold text-accent mb-4 flex items-center gap-2">
-                        <Cpu className="w-5 h-5" />
-                        Tools & Tech
-                      </h4>
-                      <ul className="space-y-2">
-                        {service.details.tools.map((tool, idx) => (
-                          <li key={idx} className="flex items-center gap-2 text-sm">
-                            <div className="w-2 h-2 bg-accent rounded-full"></div>
-                            {tool}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div>
-                      <h4 className="font-bold text-accent mb-4 flex items-center gap-2">
-                        <Database className="w-5 h-5" />
-                        Deliverables
-                      </h4>
-                      <ul className="space-y-2">
-                        {service.details.deliverables.map((item, idx) => (
-                          <li key={idx} className="flex items-center gap-2 text-sm">
-                            <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
+                <DialogContent className="max-w-4xl max-h-[80vh] overflow-hidden bg-background border-border p-0 flex flex-col">
+                  {/* HEADER GAK JELASSSSSSS */}
+                  <div className="sticky top-0 z-50 bg-background border-b border-border p-6 pb-4">
+                    <div className="flex justify-between items-start gap-4">
+                      <div className="flex items-start gap-4 flex-1">
+                        <div className="text-accent mt-1 flex-shrink-0">
+                          {service.icon}
+                        </div>
+                        <div className="flex-1">
+                          <DialogTitle className="text-2xl font-bold text-foreground">
+                            {service.title}
+                          </DialogTitle>
+                          <DialogDescription className="text-muted-foreground mt-2">
+                            {service.description}
+                          </DialogDescription>
+                        </div>
+                      </div>
+                      <DialogClose className="rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 flex-shrink-0">
+                        <X className="h-5 w-5" />
+                        <span className="sr-only">Close</span>
+                      </DialogClose>
                     </div>
                   </div>
 
-                  <div className="mt-8 p-6 bg-accent/5 rounded-lg border border-accent/20">
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                  {/* Efek Scroll */}
+                  <div className="flex-1 overflow-y-auto p-6">
+                    <div className="grid md:grid-cols-3 gap-6">
                       <div>
-                        <div className="text-2xl font-bold text-accent mb-1">{service.price}</div>
-                        <div className="text-sm text-muted-foreground">Timeline: {service.timeline}</div>
+                        <h4 className="font-bold text-accent mb-3 flex items-center gap-2">
+                          <TrendingUp className="w-4 h-4" />
+                          Process
+                        </h4>
+                        <ul className="space-y-2">
+                          {service.details.process.map((step, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <div className="w-5 h-5 bg-accent/20 text-accent rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
+                                {idx + 1}
+                              </div>
+                              <span className="text-sm">{step}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                      <Button
-                        className="bg-accent hover:bg-accent/90 text-accent-foreground"
-                        onClick={() =>
-                          window.open(
-                            "https://wa.me/6287797937519?text=Hi, I'm interested in " + service.title,
-                            "_blank",
-                          )
-                        }
-                      >
-                        Get Started
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </Button>
+
+                      <div>
+                        <h4 className="font-bold text-accent mb-3 flex items-center gap-2">
+                          <Cpu className="w-4 h-4" />
+                          Tools & Tech
+                        </h4>
+                        <ul className="space-y-2">
+                          {service.details.tools.map((tool, idx) => (
+                            <li key={idx} className="flex items-center gap-2 text-sm">
+                              <div className="w-1.5 h-1.5 bg-accent rounded-full flex-shrink-0"></div>
+                              {tool}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div>
+                        <h4 className="font-bold text-accent mb-3 flex items-center gap-2">
+                          <Database className="w-4 h-4" />
+                          Deliverables
+                        </h4>
+                        <ul className="space-y-2">
+                          {service.details.deliverables.map((item, idx) => (
+                            <li key={idx} className="flex items-center gap-2 text-sm">
+                              <CheckCircle className="w-3 h-3 text-accent flex-shrink-0" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="mt-8 p-6 bg-accent/5 rounded-lg border border-accent/20">
+                      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                          <div className="text-xl font-bold text-accent mb-1">{service.price}</div>
+                          <div className="text-sm text-muted-foreground">Timeline: {service.timeline}</div>
+                        </div>
+                        <Button
+                          className="bg-accent hover:bg-accent/90 text-accent-foreground transition-all duration-300 hover:scale-105"
+                          onClick={() =>
+                            window.open(
+                              "https://wa.me/6287797937519?text=Hi, I'm interested in " + service.title,
+                              "_blank",
+                            )
+                          }
+                        >
+                          Get Started
+                          <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </DialogContent>
@@ -512,6 +541,8 @@ export default function EncryptedJockeyPage() {
           </div>
         </div>
       </section>
+
+
 
       <section id="portfolio" className="py-20 px-4">
         <div className="container mx-auto">
@@ -637,7 +668,6 @@ export default function EncryptedJockeyPage() {
               <ChevronRight className="w-4 h-4" />
             </Button>
 
-            {/* Dots indicator */}
             <div className="flex justify-center gap-2 mt-8">
               {testimonials.map((_, index) => (
                 <button
