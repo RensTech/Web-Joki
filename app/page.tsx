@@ -84,7 +84,7 @@ export default function EncryptedJockeyPage() {
 
   const handleStartProject = () => {
     window.open(
-      "https://wa.me/6287797937519?text=Hi, I'm interested in starting a new project with ENCRYPTED JOCKEY",
+      "https://wa.me/6287797937519?text=Hi, I'm interested in starting a new project with ENCRYPTED IT SERVICES",
       "_blank",
     )
   }
@@ -266,7 +266,7 @@ export default function EncryptedJockeyPage() {
           <div className="flex justify-between items-center">
             <div className="text-2xl font-bold text-primary flex items-center gap-2">
               <Terminal className="w-8 h-8 text-accent" />
-              ENCRYPTED JOCKEY
+              ENCRYPTED IT SERVICES
             </div>
 
             <div className="hidden md:flex items-center space-x-8">
@@ -334,7 +334,7 @@ export default function EncryptedJockeyPage() {
               Professional Freelance Services
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-foreground leading-tight">ENCRYPTED JOCKEY</h1>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-foreground leading-tight">ENCRYPTED IT SERVICES</h1>
 
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
               Delivering exceptional <span className="text-accent font-semibold">UI/UX Design</span>,
@@ -877,7 +877,7 @@ export default function EncryptedJockeyPage() {
             <div className="md:col-span-2">
               <div className="text-2xl font-bold mb-4 flex items-center gap-2">
                 <Terminal className="w-6 h-6 text-accent" />
-                ENCRYPTED JOCKEY
+                ENCRYPTED IT SERVICES
               </div>
               <p className="text-muted-foreground mb-4 max-w-md">
                 Professional freelance services delivering exceptional results in UI/UX Design, Web Development, and
